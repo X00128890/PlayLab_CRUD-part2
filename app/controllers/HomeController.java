@@ -45,16 +45,16 @@ public class HomeController extends Controller {
 
 
 
-    public Result addproduct() {
+    public Result addProduct() {
 
 
 
 	Form<Product> addProductForm = formFactory.form(Product.class);
 
 
-	return ok(addproduct.render());
+	return ok(addProduct.render(addProductForm));
     }
-}
+
 	public Result addProductSubmit() {
 	
 
@@ -62,9 +62,9 @@ public class HomeController extends Controller {
 	Form<Product> newProductForm = formFactory.form(Product.class).bindFromRequest();
 
 
-	if(NewProductForm.hasErrors()) {
+	if(newProductForm.hasErrors()) {
 
-	    return badRequests(addProduct.render(newProductForm));
+	    return badRequest(addProduct.render(newProductForm));
 	}
 
 
@@ -81,7 +81,7 @@ public class HomeController extends Controller {
 	return redirect(controllers.routes.HomeController.products());
     }
 
-  }
+  
 	public Result deleteProduct(Long id) {
 
 

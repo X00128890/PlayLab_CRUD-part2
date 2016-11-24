@@ -39,7 +39,7 @@
               <td>&euro; @("%.2f".format(p.getPrice))</td>
 
               <td>
-		   <a href="@routes.HomeController.deleteProduct(p.getID)" class="btn-xs btn-danger"
+		   <a href="@routes.HomeController.deleteProduct(p.getId)" class="btn-xs btn-danger"
 		    onclick="return confirmDel();">
 	  	    <span class="glyphicon glyphicon-trash"></span>
 		  </a>
