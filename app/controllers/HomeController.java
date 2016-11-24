@@ -17,6 +17,15 @@ import models.*;
 
 public class HomeController extends Controller {
 
+	
+	private FormFactory formFactory;
+
+	
+	@Inject
+	public HomeController(FormFactory f) {
+	    this.formFactory = f;
+	}
+
     public Result index(String name) {
         return ok(index.render("Welcome to the Home page", name));
     }
@@ -32,6 +41,56 @@ public class HomeController extends Controller {
         return ok(products.render(productsList));
     }
 
-}
 
+
+
+
+    public Result addproduct() {
+
+
+
+	Form<Product> addProductForm = formFactory.form(Product.class);
+
+
+	return ok(addproduct.render());
+    }
+}
+	public Result addProductSubmit() {
+	
+
+
+	Form<Product> newProductForm = formFactory.form(Product.class).bindFromRequest();
+
+
+	if(NewProductForm.hasErrors()) {
+
+	    return badRequests(addProduct.render(newProductForm));
+	}
+
+
+	Product newProduct = newProductForm.get();
+
+
+	newProduct.save();
+
+
+
+	flash("Success", "Product " + newProduct.getName() + " has been created");
+
+
+	return redirect(controllers.routes.HomeController.products());
+    }
+
+  }
+	public Result deleteProduct(Long id) {
+
+
+	    Product.find.ref(id).delete();
+
+	    flash("success", "Product has been deleted");
+
+
+	    return redirect(routes.HomeController.products());
+    }
+  }
 
